@@ -5,15 +5,15 @@ import {
   SignInButton,
   SignedIn,
   SignedOut,
-  UserButton
-} from '@clerk/nextjs'
+  UserButton,
+} from "@clerk/nextjs";
 import Header from "@/components/Header";
-
-
+import Sidebar from "@/components/Sidebar";
 
 export const metadata: Metadata = {
   title: "Notion X",
-  description: "Effortlessly manage your notes, tasks, and projects with our advanced AI-powered Notion clone. Designed to enhance productivity and streamline your workflow, our platform offers intelligent content suggestions, real-time collaboration, and a user-friendly interface.",
+  description:
+    "Effortlessly manage your notes, tasks, and projects with our advanced AI-powered Notion clone. Designed to enhance productivity and streamline your workflow, our platform offers intelligent content suggestions, real-time collaboration, and a user-friendly interface.",
 };
 
 export default function RootLayout({
@@ -25,8 +25,13 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body>
-        <Header/>
-          {children}
+          <Header />
+          <div className="flex min-h-screen">
+            <Sidebar />
+            <div className="flex-1 p-4 bg-gray-100 overflow-y-auto scrollbar-hide">
+              {children}
+            </div>
+          </div>
         </body>
       </html>
     </ClerkProvider>
