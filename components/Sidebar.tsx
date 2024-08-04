@@ -16,6 +16,7 @@ import { useUser } from "@clerk/nextjs";
 import { collectionGroup,where,query, DocumentData } from "firebase/firestore";
 import { db } from "@/firebase";
 import { useEffect, useState } from "react";
+import SidebarOption from "./SidebarOption";
 
 interface RoomDocument extends DocumentData{
   createdAt:string,
@@ -79,28 +80,57 @@ const Sidebar = () => {
 
   const menuOptions = (
     <>
-   <NewDocumentButton/>
+    <div className=" flex flex-col gap-2">
+    <NewDocumentButton/>
    {/* My documents */}
   
-   {groupedData.owner.length===0?(
+  <div className="flex py-4 flex-col space-y-4 md:max-w-36">
+  {groupedData.owner.length===0?(
     <h2 className="text-gray-500 font-semibold text-lg py-4 ">No Documents Found</h2>
    ):(
    <>
    <h2 className="text-gray-500 font-semibold text-lg py-4">My Documents</h2>
    {groupedData.owner.map((doc)=>(
-    <div key={doc.roomId} className="text-black">{doc.roomId}</div>
-    // <SidebarOption key={doc.id} id={doc.id} href={`/doc/${docId}`}/>
+   
+    <SidebarOption key={doc.id} id={doc.id} href={`/doc/${doc.id}`}/>
    ))}
 
    </>
 
    )}
+  </div>
 
-   {/* My Lists */}
+
 
    {/* Shared with me */}
 
+   <div className="flex py-4 flex-col space-y-4 md:max-w-36">
+  {groupedData.editor.length===0?(
+    <>
+    <h2 className="text-gray-500 font-semibold text-lg pt-4 ">Shared With Me</h2>
+    <p className=" text-gray-500 font-medium text-sm">No Documents have been shared with you yet.</p>
+    </>
+    
+   ):(
+   <>
+   <h2 className="text-gray-500 font-semibold text-lg py-4">Shared With Me</h2>
+   {groupedData.owner.map((doc)=>(
+   
+    <SidebarOption key={doc.id} id={doc.id} href={`/doc/${doc.id}`}/>
+   ))}
+
+   </>
+
+   )}
+  </div>
+
+
+
+
+
    {/* List */}
+
+    </div>
     </>
     
 );

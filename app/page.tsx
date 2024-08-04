@@ -1,9 +1,11 @@
-import Image from "next/image";
+import { Button } from "@/components/ui/button";
+
 
 export default function Home() {
   return (
     <>
-   <p>Reast fo the oage</p>
+   <p>Reast fo the page</p>
+   <Button>Click me</Button>
     </>
   );
 }

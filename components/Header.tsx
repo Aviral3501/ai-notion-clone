@@ -8,10 +8,10 @@ const Header = () => {
 
   return (
     <>
-     <div className="flex justify-between items-center">
+     <div className="flex justify-between items-center px-4">
      {user && (
         <div>
-          <h1 className="font-bold text-xl tracking-tighter">{capitalizeFirstLetter(user?.firstName || '')}{`'s`} Space</h1>
+          <h1 className="font-medium text-xl tracking-tight py-4">{capitalizeFirstLetter(user?.firstName || '')}{`'s`} Space</h1>
         </div>
       )}
     
