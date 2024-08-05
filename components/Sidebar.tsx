@@ -84,7 +84,7 @@ const Sidebar = () => {
     <NewDocumentButton/>
    {/* My documents */}
   
-  <div className="flex py-4 flex-col space-y-4 md:max-w-36">
+  <div className="flex py-4 flex-col space-y-4  md:max-w-[275px]">
   {groupedData.owner.length===0?(
     <h2 className="text-gray-500 font-semibold text-lg py-4 ">No Documents Found</h2>
    ):(
@@ -92,7 +92,7 @@ const Sidebar = () => {
    <h2 className="text-gray-500 font-semibold text-lg py-4">My Documents</h2>
    {groupedData.owner.map((doc)=>(
    
-    <SidebarOption key={doc.id} id={doc.id} href={`/doc/${doc.id}`}/>
+    <SidebarOption key={doc.id} id={doc.id} href={`/doc/${doc.id}`} />
    ))}
 
    </>
@@ -104,7 +104,7 @@ const Sidebar = () => {
 
    {/* Shared with me */}
 
-   <div className="flex py-4 flex-col space-y-4 md:max-w-36">
+   <div className="flex py-4 flex-col space-y-4 md:max-w-[275px]">
   {groupedData.editor.length===0?(
     <>
     <h2 className="text-gray-500 font-semibold text-lg pt-4 ">Shared With Me</h2>
@@ -116,7 +116,7 @@ const Sidebar = () => {
    <h2 className="text-gray-500 font-semibold text-lg py-4">Shared With Me</h2>
    {groupedData.owner.map((doc)=>(
    
-    <SidebarOption key={doc.id} id={doc.id} href={`/doc/${doc.id}`}/>
+    <SidebarOption key={doc.id} id={doc.id} href={`/doc/${doc.id}`} />
    ))}
 
    </>
@@ -148,7 +148,7 @@ const Sidebar = () => {
             <SheetHeader>
               <SheetTitle className="text-2xl font-bold tracking-normal">Menu</SheetTitle>
              
-              <div className="">
+              <div>
                 {/* Options */}
                 {menuOptions}
               </div>
@@ -158,7 +158,7 @@ const Sidebar = () => {
       </div>
 
       {/* big screen view */}
-      <div className="hidden md:inline ">
+      <div className="hidden md:inline">
         {menuOptions}
       </div>
     </div>
