@@ -4,7 +4,7 @@ import { RoomProvider as RoomProviderWrapper, ClientSideSuspense} from "@liveblo
 import LoadingSpinner from "./LoadingSpinner";
 import LiveCursorProvider from "./LiveCursorProvider";
 
-const RoomProvider = ({roomId,children}:{roomId:string,children:React.ReactNode}) => {
+function RoomProvider({roomId,children}:{roomId:string,children:React.ReactNode}){
   return (
     <RoomProviderWrapper
     id={roomId}
