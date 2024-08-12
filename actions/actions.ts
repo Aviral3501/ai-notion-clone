@@ -1,6 +1,7 @@
 "use server";
 
 import { adminDb } from "@/firebase-admin";
+import liveblocks from "@/lib/liveblocks";
 import {auth} from "@clerk/nextjs/server";
 import { title } from "process";
 
@@ -28,4 +29,40 @@ export async function createNewDocument(){
 
     return {docId:docRef.id};
 
+}
+
+
+
+// delete document server action
+
+export async function deleteDocument(roomId:string) {
+    auth().protect(); //protect the route 
+    console.log("Deleting the document : "+roomId);
+
+    try {
+        // deleting the document reference itself
+        await adminDb.collection("documents").doc(roomId).delete();
+        // deleting all rooms with id == currRoomId
+        // delete the room reference in all of the users in the room
+        const query = await adminDb.collectionGroup("rooms").where("roomId","==",roomId).get();
+
+        const batch = adminDb.batch();
+        query.docs.forEach((doc)=>{
+            batch.delete(doc.ref);
+        })
+
+        await batch.commit();
+        // delete the room form liveblocks
+        await liveblocks.deleteRoom(roomId);
+
+        return {success:true};
+        
+    } catch (error) {
+        console.error(error);
+        return {success:false};
+        
+    }
+
+    
+    
 }

@@ -9,6 +9,7 @@ import {
 } from "@clerk/nextjs";
 import Header from "@/components/Header";
 import Sidebar from "@/components/Sidebar";
+import { Toaster } from "react-hot-toast";
 
 export const metadata: Metadata = {
   title: "Notion X",
@@ -32,6 +33,7 @@ export default function RootLayout({
               {children}
             </div>
           </div>
+          <Toaster/>
         </body>
       </html>
     </ClerkProvider>

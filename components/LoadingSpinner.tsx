@@ -11,11 +11,11 @@ export default function ExamplePage() {
     const interval = setInterval(() => {
       setProgress((prevProgress) => {
         // Stop incrementing at 100%
-        if (prevProgress >= 100) {
+        if (prevProgress >= 80) {
           clearInterval(interval);
-          return 100;
+          return 90;
         }
-        return prevProgress + 24;
+        return prevProgress + 18;
       });
     }, 400);
 
