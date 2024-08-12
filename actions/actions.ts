@@ -3,7 +3,6 @@
 import { adminDb } from "@/firebase-admin";
 import liveblocks from "@/lib/liveblocks";
 import {auth} from "@clerk/nextjs/server";
-import { title } from "process";
 
 export async function createNewDocument(){
     auth().protect(); //protecting the route using clerk --> only auth users can create a new doc

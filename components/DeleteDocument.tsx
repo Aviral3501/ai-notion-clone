@@ -14,6 +14,7 @@ import { DialogClose } from "@radix-ui/react-dialog";
 import { usePathname, useRouter } from "next/navigation";
 
 import toast from "react-hot-toast"
+import { deleteDocument } from "@/actions/actions";
 
 const DeleteDocument = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -23,14 +24,24 @@ const DeleteDocument = () => {
   
 //   delte the document
 const handleDelete =async()=>{
-    // get the id of the doc
-    const roomId = pathName.split("/").pop();
+        // get the id of the doc
+        const roomId = pathName.split("/").pop();
+
+    if (!roomId) {
+        // Handle the case where roomId is undefined
+        console.error("Room ID is undefined");
+        toast.error("Failed to delete room");
+        return;
+      }
+
+
     console.log("deleting document : "+roomId);
 
     startTransition(async()=>{
         // server action to delete the document
-        // const {success} = await deleteDocument(roomId);
-        const success = false;
+
+        const {success} = await deleteDocument(roomId);
+      
 
         if(success){
             setIsOpen(false);
