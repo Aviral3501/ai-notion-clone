@@ -10,6 +10,7 @@ import useOwner from "@/lib/useOwner";
 import Editor from "./Editor";
 import { useUser } from "@clerk/nextjs";
 import DeleteDocument from "./DeleteDocument";
+import InviteUser from "./InviteUser";
 
 const Document = ({ id }: { id: string }) => {
   const [data, loading, error] = useDocumentData(doc(db, "documents", id));
@@ -47,7 +48,14 @@ const Document = ({ id }: { id: string }) => {
       {isUpdating ? "Updating..." : "Update"}
     </Button>
 
-    {isOwner && <DeleteDocument/>}
+    {isOwner && (
+      <>
+      <div className="flex gap-2">
+        <DeleteDocument />
+        <InviteUser/>
+      </div>
+      </>
+    )}
   </form>
 
   <div className="mt-2 w-full flex justify-between items-center">
@@ -58,7 +66,7 @@ const Document = ({ id }: { id: string }) => {
       {/* delete document */}
       <div className="text-sm font-semibold ml-1">Owned By: {camelCasedName || "Unknown Owner"}</div>
       <div className="flex justify-between items-center gap-2">
-        Lorem, ipsum.
+       
       </div>
       </>
     )}
