@@ -31,8 +31,8 @@ const Document = ({ id }: { id: string }) => {
   };
 
   return (
-    <div className="flex flex-col items-center max-w-6xl w-full mx-auto pb-5 px-2 bg-slate-400/10">
-  <form onSubmit={updateTitle} className="flex w-full space-x-2">
+    <div className="flex flex-col items-center max-w-6xl w-full mx-auto pb-5 px-2 bg-slate-400/10">   {/*  bg-slate-400/10*/}
+  <form onSubmit={updateTitle} className="flex w-full space-x-2 mt-4">
     {/* update title */}
     <Input
       value={input}
@@ -44,12 +44,13 @@ const Document = ({ id }: { id: string }) => {
     </Button>
   </form>
 
-  <div className="mt-5 w-full">
+  <div className="mt-2 w-full">
     {/* Manage users */}
-    heelo
+
   </div>
 
-  <hr className="w-full my-5" />
+  <hr className="w-full my-5 border-t-2 border-gray-800/20" />
+
 
   {/* Collaborative editor */}
   <Editor />
