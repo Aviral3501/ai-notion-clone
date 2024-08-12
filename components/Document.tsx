@@ -31,7 +31,7 @@ const Document = ({ id }: { id: string }) => {
   };
 
   return (
-    <div className="flex flex-col items-center max-w-6xl w-full mx-auto pb-5 px-2 bg-slate-400/10">   {/*  bg-slate-400/10*/}
+    <div className="flex flex-col items-center max-w-6xl w-full mx-auto pb-5 px-2 bg-white">   {/*  bg-slate-400/10*/}
   <form onSubmit={updateTitle} className="flex w-full space-x-2 mt-4">
     {/* update title */}
     <Input
