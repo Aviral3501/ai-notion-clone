@@ -11,6 +11,9 @@ import Editor from "./Editor";
 import { useUser } from "@clerk/nextjs";
 import DeleteDocument from "./DeleteDocument";
 import InviteUser from "./InviteUser";
+import { getRoomOwner } from "@/actions/actions";
+import Avatars from "./Avatars";
+import ManageUsers from "./ManageUsers";
 
 const Document = ({ id }: { id: string }) => {
   const [data, loading, error] = useDocumentData(doc(db, "documents", id));
@@ -18,7 +21,7 @@ const Document = ({ id }: { id: string }) => {
   const [isUpdating, startTransition] = useTransition();
   const isOwner = useOwner();
   const  {user} = useUser();
-  const camelCasedName = user?.fullName ? toCamelCase(user.fullName) : "";
+
 
   useEffect(() => {
     if (data) {
@@ -34,6 +37,8 @@ const Document = ({ id }: { id: string }) => {
       });
     });
   };
+
+  const camelCasedName = user?.fullName ? toCamelCase(user.fullName) : "";
 
   return (
     <div className="flex flex-col items-center max-w-6xl w-full mx-auto pb-5 px-2 bg-white">   {/*  bg-slate-400/10*/}
@@ -51,6 +56,7 @@ const Document = ({ id }: { id: string }) => {
     {isOwner && (
       <>
       <div className="flex gap-2">
+        {/* INVITE USER  and DELETE Document*/}
         <DeleteDocument />
         <InviteUser/>
       </div>
@@ -59,17 +65,17 @@ const Document = ({ id }: { id: string }) => {
   </form>
 
   <div className="mt-2 w-full flex justify-between items-center">
-    {/* Manage users */}
-    {isOwner && (
-      <>
-      {/* invite user */}
-      {/* delete document */}
+    
       <div className="text-sm font-semibold ml-1">Owned By: {camelCasedName || "Unknown Owner"}</div>
       <div className="flex justify-between items-center gap-2">
-       
       </div>
-      </>
-    )}
+  </div>
+
+  <div className="flex max-w-6xl mx-auto justify-between items-center gap-4">
+    {/* magange users */}
+    <ManageUsers/>
+    {/* user avatars */}
+    <Avatars/>
 
   </div>
 
@@ -108,29 +114,3 @@ function toCamelCase(str: string) {
 
 
 
-
-    // <div className="flex justify-center max-w-6xl w-full mx-auto pb-5 px-2 bg-red-200 ">
-    //   <form onSubmit={updateTitle} className="flex space-x-2 max-w-6xl w-full">
-    //     {/* update title */}
-    //     <Input
-    //       value={input}
-    //       onChange={(e) => setInput(e.target.value)}
-    //       className="flex-grow"
-    //     />
-    //     <Button disabled={isUpdating} type="submit">
-    //       {isUpdating ? "Updating..." : "Update"}
-    //     </Button>
-    //   </form>
-
-    //   <div className="mt-5">
-    //     {/* Manage users */}
-    //     heelo
-
-    //     {/* Avatars */}
-    //   </div>
-
-    //   <hr className="pb-10"/>
-
-    //   {/* Collaborative editor */}
-    //   <Editor/>
-    // </div>

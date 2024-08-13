@@ -81,3 +81,46 @@ export async function inviteUserToDocument(roomId:string,email:string){
         return {success:false};
     }
 }
+
+export async function getRoomOwner(roomId: string) {
+    auth().protect(); // Protecting the route
+  
+    try {
+      // Query Firestore to find the document where the role is 'owner' and roomId matches
+      const querySnapshot = await adminDb
+        .collectionGroup("rooms")
+        .where("roomId", "==", roomId)
+        .where("role", "==", "owner")
+        .limit(1)
+        .get();
+  
+      // Extract the owner’s email from the query result
+      if (!querySnapshot.empty) {
+        const ownerDoc = querySnapshot.docs[0];
+        const ownerData = ownerDoc.data();
+        return { success: true, owner: ownerData.userId };
+      } else {
+        return { success: false, message: "No owner found for this room." };
+      }
+    } catch (error) {
+      console.error("Error fetching room owner:", error);
+      return { success: false, message: "Failed to fetch room owner." };
+    }
+  }
+
+
+// remove the user from the room
+export async function removeUserFromDocument(roomId: string, email: string) {
+    auth().protect(); // Protecting the route
+    console.log("Removing user from room : "+roomId+" for user : "+email);
+    try {
+        await adminDb.collection("users").doc(email).collection("rooms").doc(roomId).delete();
+           
+        return {success:true};
+        
+    } catch (error) {
+        console.error(error);
+        return {sucess:false};
+        
+    }
+}
