@@ -1,27 +1,22 @@
-import {
-    initializeApp,
-    getApps,
-    App,
-    getApp,
-    cert,
-} from "firebase-admin/app";
-
+import { initializeApp, getApps, App, getApp, cert } from "firebase-admin/app";
 import { getFirestore } from "firebase-admin/firestore";
 
-// get the service key - firebase
-const serviceKey = require("@/service_key.json");
+let app: App;
 
-let app:App;
-
-if(getApps().length===0){
-    app = initializeApp({
-        credential:cert(serviceKey),
-    });
-}else{
-    app = getApp();
+if (getApps().length === 0) {
+  app = initializeApp({
+    credential: cert({
+      projectId: process.env.FIREBASE_PROJECT_ID,
+      privateKey: process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
+      clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
+    }),
+  });
+} else {
+  app = getApp();
 }
 
-// adminDB
 const adminDb = getFirestore(app);
 
-export {app as adminApp , adminDb}
+export { app as adminApp, adminDb };
+
+
